@@ -50,7 +50,9 @@ const Participant = ({ participant }) => {
         videoTrack.detach();
       };
     }
+  }, [videoTracks]);
 
+  useEffect(() => {
     const audioTrack = audioTracks[0];
     if (audioTrack) {
       audioTrack.attach(audioRef.current);
@@ -58,7 +60,7 @@ const Participant = ({ participant }) => {
         audioTrack.detach();
       };
     }
-  }, [videoTracks, audioTracks]);
+  }, [audioTracks]);
 
   return (
     <div className="participant">
