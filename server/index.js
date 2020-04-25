@@ -1,6 +1,6 @@
 const config = require('./config');
 require('dotenv').config();
-const path = require("path");
+const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const { chatToken, videoToken, voiceToken } = require('./tokens');
@@ -8,7 +8,7 @@ const { chatToken, videoToken, voiceToken } = require('./tokens');
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-if(!process.env.PROD){
+if (!process.env.PROD) {
   const pino = require('express-pino-logger')();
   app.use(pino);
 }
@@ -17,7 +17,7 @@ const sendTokenResponse = (token, res) => {
   res.set('Content-Type', 'application/json');
   res.send(
     JSON.stringify({
-      token: token.toJwt()
+      token: token.toJwt(),
     })
   );
 };
@@ -66,15 +66,14 @@ app.post('/voice/token', (req, res) => {
   sendTokenResponse(token, res);
 });
 
-
 if (process.env.PROD) {
-  app.use(express.static(path.join(__dirname, './build')));
+  app.use(express.static(path.join(__dirname, '../build')));
   app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, './build/index.html'));
+    res.sendFile(path.join(__dirname, '../build/index.html'));
   });
 }
 
-
-app.listen(3001, () =>{
-  console.log('Express server is running on localhost:3001');
+const port = process.env.PORT || 5000;
+app.listen(port, () => {
+  console.log(`Express server is running on ${port}`);
 });
