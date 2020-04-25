@@ -16,7 +16,7 @@
     "eject": "react-scripts eject",
     "server": "nodemon server/index.js | pino-colada",
     "dev": "run-p server start",
-    "prod": "PROD=true node server/index.js",
+    "prod": "PROD=true node ./server/index.js",
     "postinstall": "yarn build"
   },
   "proxy": "http://localhost:3001",
