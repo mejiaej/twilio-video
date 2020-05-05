@@ -47,10 +47,10 @@ app.get('/video/token', (req, res) => {
   sendTokenResponse(token, res);
 });
 
-app.post('/video/token', (req, res) => {
+app.post('/video/token', async (req, res) => {
   const identity = req.body.identity;
   const room = req.body.room;
-  const token = videoToken(identity, room, config);
+  const token = await videoToken(identity, room, config);
   sendTokenResponse(token, res);
 });
 
